@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SimpleTodoList</string>
+
+    <string name="up">UP</string>
+    <string name="down">DOWN</string>
+    <string name="blank">blank...</string>
+
+    <string name="action_add">New</string>
+    <string name="action_settings">Settings</string>
+</resources>
