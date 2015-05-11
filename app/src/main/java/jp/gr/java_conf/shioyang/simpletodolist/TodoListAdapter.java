@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -15,11 +15,16 @@ import java.util.List;
  */
 public class TodoListAdapter extends ArrayAdapter {
     private LayoutInflater layoutInflater;
+    private UpDownButtonClickListener upDownButtonClickListener;
 
-    public TodoListAdapter(Context context, int resource, List<TodoItem> objects) {
-        super(context, resource, objects);
-
+    public TodoListAdapter(Context context, int resource, List<TodoItem> todoItemList) {
+        super(context, resource, todoItemList);
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        upDownButtonClickListener = null;
+    }
+
+    public void setUpDownButtonClickListener(UpDownButtonClickListener upDownButtonClickListener) {
+        this.upDownButtonClickListener = upDownButtonClickListener;
     }
 
     @Override
@@ -32,6 +37,27 @@ public class TodoListAdapter extends ArrayAdapter {
         EditText todoEditText = (EditText) convertView.findViewById(R.id.todoEditText);
         todoEditText.setText(todoItem.getTodo());
 
+        setUpDownFeature(position, convertView);
+
         return convertView;
+    }
+
+    private void setUpDownFeature(final int position, View convertView) {
+        Button upButton = (Button) convertView.findViewById(R.id.upButton);
+        setupUpDownButton(upButton, position, true);
+
+        Button downButton = (Button) convertView.findViewById(R.id.downButton);
+        setupUpDownButton(downButton, position, false);
+    }
+
+    private void setupUpDownButton(Button button, int position, final boolean isUp) {
+        button.setTag(R.string.tag_position, position);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (upDownButtonClickListener != null)
+                    upDownButtonClickListener.onUpDownButtonClick((int) view.getTag(R.string.tag_position), isUp);
+            }
+        });
     }
 }

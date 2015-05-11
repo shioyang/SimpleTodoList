@@ -25,25 +25,28 @@ public class MainActivity extends ActionBarActivity {
         TodoItem todoItem4 = new TodoItemImple("Do TODO 4", 0);
         TodoItem todoItem5 = new TodoItemImple("Do TODO 5", 0);
 
-        ArrayList<TodoItem> todoItemArray = new ArrayList<TodoItem>();
+        ArrayList<TodoItem> todoItemArray = new ArrayList<>();
         todoItemArray.add(todoItem1);
         todoItemArray.add(todoItem2);
         todoItemArray.add(todoItem3);
         todoItemArray.add(todoItem4);
         todoItemArray.add(todoItem5);
 
-        TodoList todoList = new TodoListImple(todoItemArray);
+        final TodoList todoList = new TodoListImple(todoItemArray);
         //test
 
-        TodoListAdapter todoListAdapter = new TodoListAdapter(this, 0, todoList.getTodoItems());
+        final TodoListAdapter todoListAdapter = new TodoListAdapter(this, 0, todoList.getTodoItems());
 
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(todoListAdapter);
 
-        //test
-        todoList.swapTodoItem(2, true);
-        todoListAdapter.notifyDataSetChanged();
-        //test
+        todoListAdapter.setUpDownButtonClickListener(new UpDownButtonClickListener() {
+            @Override
+            public void onUpDownButtonClick(int position, boolean isUp) {
+                todoList.swapTodoItem(position, isUp);
+                todoListAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -69,5 +72,8 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void testFunc() {
     }
 }

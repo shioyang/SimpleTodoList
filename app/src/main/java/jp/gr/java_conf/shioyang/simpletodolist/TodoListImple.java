@@ -57,7 +57,6 @@ public class TodoListImple implements TodoList {
         }
     }
 
-
     @Override
     public void swapTodoItem(int position, Boolean isUp) {
         int newPosition = position + (isUp ? -1 : 1);
