@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">SimpleTodoList</string>
 
+    <!-- View -->
     <string name="up">UP</string>
     <string name="down">DOWN</string>
     <string name="blank">blank...</string>
 
+    <!-- Button -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Action Bar -->
     <string name="action_add">New</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Tag -->
     <string name="tag_position">1</string>
+    <string name="remove">Remove</string>
+
 </resources>

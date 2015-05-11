@@ -1,10 +1,16 @@
 package jp.gr.java_conf.shioyang.simpletodolist;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.preference.DialogPreference;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -36,10 +42,6 @@ public class MainActivity extends ActionBarActivity {
         //test
 
         final TodoListAdapter todoListAdapter = new TodoListAdapter(this, 0, todoList.getTodoItems());
-
-        ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(todoListAdapter);
-
         todoListAdapter.setUpDownButtonClickListener(new UpDownButtonClickListener() {
             @Override
             public void onUpDownButtonClick(int position, boolean isUp) {
@@ -47,6 +49,29 @@ public class MainActivity extends ActionBarActivity {
                 todoListAdapter.notifyDataSetChanged();
             }
         });
+
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(todoListAdapter);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long id) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(adapterView.getContext());
+                dialogBuilder.setTitle("Remove Item");
+                dialogBuilder.setMessage("Do you want to remove the selected item?");
+                dialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        todoList.removeTodoItem(position);
+                        todoListAdapter.notifyDataSetChanged();
+                    }
+                });
+                dialogBuilder.setNegativeButton(R.string.cancel, null);
+                AlertDialog dialog = dialogBuilder.create();
+                dialog.show();
+                return true;
+            }
+        });
+
     }
 
     @Override
