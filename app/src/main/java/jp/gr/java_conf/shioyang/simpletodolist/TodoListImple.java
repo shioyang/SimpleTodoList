@@ -29,9 +29,21 @@ public class TodoListImple implements TodoList {
     }
 
     @Override
+    public void addTodoItem(int position) {
+        if (0 <= position && position <= todoItemArray.size())
+            todoItemArray.add(position, new TodoItemImple());
+    }
+
+    @Override
     public void addTodoItem(int position, TodoItem todoItem) {
         if (0 <= position && position <= todoItemArray.size())
             todoItemArray.add(position, todoItem);
+    }
+
+    @Override
+    public void addTodoItemToLast() {
+        int position = todoItemArray.size();
+        addTodoItem(position);
     }
 
     @Override
@@ -65,5 +77,10 @@ public class TodoListImple implements TodoList {
         TodoItem todoItem = todoItemArray.get(position);
         todoItemArray.set(position, todoItemArray.get(newPosition));
         todoItemArray.set(newPosition, todoItem);
+    }
+
+    @Override
+    public int size() {
+        return todoItemArray.size();
     }
 }

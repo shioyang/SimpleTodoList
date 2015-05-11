@@ -11,10 +11,15 @@ public interface TodoList {
 
     void save();
 
+    void addTodoItem(int position);
     void addTodoItem(int position, TodoItem todoItem);
+    void addTodoItemToLast();
+
     void removeTodoItem(int position);
     void doneTodoItem(int position);
     void undoneTodoItem(int position);
 
     void swapTodoItem(int position, Boolean isUp);
+
+    int size();
 }

@@ -9,6 +9,11 @@ public class TodoItemImple implements TodoItem {
     private String categoryName;
     private Boolean isDone;
 
+    public TodoItemImple() {
+        this.todo = "";
+        setCategory(R.string.default_category);
+    }
+
     public TodoItemImple(String todo, int categoryId) {
         this.todo = todo;
         setCategory(categoryId);

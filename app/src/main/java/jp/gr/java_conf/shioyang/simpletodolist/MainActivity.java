@@ -18,6 +18,8 @@ import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
+    TodoList todoList;
+    TodoListAdapter todoListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,12 @@ public class MainActivity extends ActionBarActivity {
         todoItemArray.add(todoItem4);
         todoItemArray.add(todoItem5);
 
-        final TodoList todoList = new TodoListImple(todoItemArray);
+        todoList = new TodoListImple(todoItemArray);
+//        final TodoList todoList = new TodoListImple(todoItemArray);
         //test
 
-        final TodoListAdapter todoListAdapter = new TodoListAdapter(this, 0, todoList.getTodoItems());
+        todoListAdapter = new TodoListAdapter(this, 0, todoList.getTodoItems());
+//        final TodoListAdapter todoListAdapter = new TodoListAdapter(this, 0, todoList.getTodoItems());
         todoListAdapter.setUpDownButtonClickListener(new UpDownButtonClickListener() {
             @Override
             public void onUpDownButtonClick(int position, boolean isUp) {
@@ -91,6 +95,8 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         switch(id) {
             case R.id.action_add:
+                todoList.addTodoItemToLast();
+                todoListAdapter.notifyDataSetChanged();
                 return true;
             case R.id.action_settings:
                 return true;

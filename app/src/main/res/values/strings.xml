@@ -4,7 +4,7 @@
     <!-- View -->
     <string name="up">UP</string>
     <string name="down">DOWN</string>
-    <string name="blank">blank...</string>
+    <string name="hint_todo">Input a TODO</string>
 
     <!-- Button -->
     <string name="ok">OK</string>
@@ -17,5 +17,6 @@
     <!-- Tag -->
     <string name="tag_position">1</string>
     <string name="remove">Remove</string>
+    <string name="default_category">0</string>
 
 </resources>
