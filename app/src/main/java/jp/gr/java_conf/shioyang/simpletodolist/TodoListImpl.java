@@ -1,15 +1,14 @@
 package jp.gr.java_conf.shioyang.simpletodolist;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by shioyang.
  */
-public class TodoListImple implements TodoList {
+public class TodoListImpl implements TodoList {
     ArrayList<TodoItem> todoItemArray;
 
-    public TodoListImple(ArrayList<TodoItem> todoItemArray) {
+    public TodoListImpl(ArrayList<TodoItem> todoItemArray) {
         setTodoItems(todoItemArray);
     }
 
@@ -31,7 +30,7 @@ public class TodoListImple implements TodoList {
     @Override
     public void addTodoItem(int position) {
         if (0 <= position && position <= todoItemArray.size())
-            todoItemArray.add(position, new TodoItemImple());
+            todoItemArray.add(position, new TodoItemImpl());
     }
 
     @Override

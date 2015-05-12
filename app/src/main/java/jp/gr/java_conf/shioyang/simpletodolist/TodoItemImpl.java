@@ -3,18 +3,18 @@ package jp.gr.java_conf.shioyang.simpletodolist;
 /**
  * Created by shioyang.
  */
-public class TodoItemImple implements TodoItem {
+public class TodoItemImpl implements TodoItem {
     private String todo;
     private int categoryId;
     private String categoryName;
     private Boolean isDone;
 
-    public TodoItemImple() {
+    public TodoItemImpl() {
         this.todo = "";
         setCategory(R.string.default_category);
     }
 
-    public TodoItemImple(String todo, int categoryId) {
+    public TodoItemImpl(String todo, int categoryId) {
         this.todo = todo;
         setCategory(categoryId);
     }
