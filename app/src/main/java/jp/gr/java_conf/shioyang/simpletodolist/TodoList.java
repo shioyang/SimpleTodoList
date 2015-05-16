@@ -1,5 +1,7 @@
 package jp.gr.java_conf.shioyang.simpletodolist;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +11,10 @@ public interface TodoList {
     void setTodoItems(ArrayList<TodoItem> todoItemArray);
     ArrayList<TodoItem> getTodoItems();
 
-    void save();
+    TodoItem getTodoItem(int position);
+
+    void save(Context context);
+    void load(Context context);
 
     void addTodoItem(int position);
     void addTodoItem(int position, TodoItem todoItem);

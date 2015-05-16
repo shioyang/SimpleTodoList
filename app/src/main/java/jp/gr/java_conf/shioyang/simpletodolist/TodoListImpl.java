@@ -1,5 +1,14 @@
 package jp.gr.java_conf.shioyang.simpletodolist;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -7,6 +16,10 @@ import java.util.ArrayList;
  */
 public class TodoListImpl implements TodoList {
     ArrayList<TodoItem> todoItemArray;
+
+    public TodoListImpl() {
+        setTodoItems(new ArrayList<TodoItem>());
+    }
 
     public TodoListImpl(ArrayList<TodoItem> todoItemArray) {
         setTodoItems(todoItemArray);
@@ -23,8 +36,37 @@ public class TodoListImpl implements TodoList {
     }
 
     @Override
-    public void save() {
+    public TodoItem getTodoItem(int position) {
+        return todoItemArray.get(position);
+    }
 
+    @Override
+    public void save(Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+        Gson gson = new Gson();
+        editor.putString(context.getResources().getString(R.string.pref_todo_list_array_json), gson.toJson(todoItemArray));
+        //test
+        Log.d("TodoListImple.save()", gson.toJson(todoItemArray));
+        //test
+        editor.apply();
+    }
+
+    @Override
+    public void load(Context context) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        String json = pref.getString(context.getResources().getString(R.string.pref_todo_list_array_json), null);
+        Log.d("TodoListImple.load", "pref.getString: " + json);
+
+        todoItemArray.clear();
+        if (json != null) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<ArrayList<TodoItemImpl>>(){}.getType();
+            ArrayList<TodoItem> array = gson.fromJson(json, listType);
+            for (TodoItem todoItem : array) {
+                todoItemArray.add(todoItem);
+            }
+        }
     }
 
     @Override

@@ -12,16 +12,24 @@ public class TodoItemImpl implements TodoItem {
     public TodoItemImpl() {
         this.todo = "";
         setCategory(R.string.default_category);
+        isDone = false;
     }
 
     public TodoItemImpl(String todo, int categoryId) {
         this.todo = todo;
         setCategory(categoryId);
+        isDone = false;
+    }
+
+    public TodoItemImpl(String todo, int categoryId, boolean isDone) {
+        this.todo = todo;
+        setCategory(categoryId);
+        this.isDone = isDone;
     }
 
     @Override
-    public void setTodo(String t) {
-        todo = t;
+    public void setTodo(String todo) {
+        this.todo = todo;
     }
 
     @Override

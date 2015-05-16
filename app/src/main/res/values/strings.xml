@@ -18,5 +18,8 @@
     <string name="tag_position">1</string>
     <string name="remove">Remove</string>
     <string name="default_category">0</string>
+    <string name="pref_todo_list_num">pref_todo_list_num</string>
+    <string name="pref_todo_list_item_prefix">pref_todo_list_item_</string>
+    <string name="pref_todo_list_array_json">pref_todo_list_array_json</string>
 
 </resources>
