@@ -11,7 +11,7 @@ public class TodoItemImpl implements TodoItem {
 
     public TodoItemImpl() {
         this.todo = "";
-        setCategory(R.string.default_category);
+        setCategory(0);
         isDone = false;
     }
 
